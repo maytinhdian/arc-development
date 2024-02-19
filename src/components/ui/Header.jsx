@@ -1,11 +1,19 @@
-import {
-  AppBar,
-  Button,
-  Tab,
-  Tabs,
-  Toolbar,
-  makeStyles,
-} from "@material-ui/core";
+import React from "react";
+import { AppBar, Tab, Tabs, Toolbar, makeStyles } from "@material-ui/core";
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+
+function ElevationScroll(props) {
+  const { children } = props;
+
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+  });
+
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
 
 const useStyles = makeStyles((theme) => ({
   toolbarMagrin: {
@@ -32,16 +40,18 @@ function Header() {
   const classes = useStyles();
   return (
     <>
-      <AppBar position="fixed">
-        <Toolbar disableGutters>
-          <img height={75} src="" alt="TMT Innovative Logo" />
-          <Tabs className={classes.tabContainer}>
-            <Tab className={classes.tab} label="The Revolution" />
-            <Tab className={classes.tab} label="About Us" />
-            <Tab className={classes.tab} label="Contact Us" />
-          </Tabs>
-        </Toolbar>
-      </AppBar>
+      <ElevationScroll>
+        <AppBar position="fixed">
+          <Toolbar disableGutters>
+            <img height={75} src="" alt="TMT Innovative Logo" />
+            <Tabs className={classes.tabContainer}>
+              <Tab className={classes.tab} label="The Revolution" />
+              <Tab className={classes.tab} label="About Us" />
+              <Tab className={classes.tab} label="Contact Us" />
+            </Tabs>
+          </Toolbar>
+        </AppBar>
+      </ElevationScroll>
     </>
   );
 }
