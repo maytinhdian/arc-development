@@ -1,6 +1,6 @@
 import { createTheme } from "@material-ui/core";
 
-const arcBlue = "#97605e";
+const arcBlue = "#461dda";
 const arcOrange = "#FFBA60";
 
 const theme = createTheme({
@@ -20,13 +20,18 @@ const theme = createTheme({
     },
   },
   typography: {
-
-      tabContainer: {
-        marginLeft: "auto",
-      },
-      tab: {
-        fontFamily: "Raleway",
-      },
+    tabContainer: {
+      marginLeft: "auto",
+    },
+    tab: {
+      fontFamily: "Raleway",
+    },
+    estimate: {
+      fontFamily: "Pacifico",
+      fontSize: "1rem",
+      textTransform: "none",
+      color: "white",
+    },
   },
 });
 
