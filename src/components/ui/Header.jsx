@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Button,
+  Menu,
+  MenuItem,
   Tab,
   Tabs,
   Toolbar,
@@ -10,6 +12,7 @@ import {
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
+
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -32,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     height: "7em",
   },
-  logoContainer:{
-    padding:0
+  logoContainer: {
+    padding: 0,
   },
   tabContainer: {
     ...theme.typography.tabContainer,
@@ -57,20 +60,31 @@ const useStyles = makeStyles((theme) => ({
 function Header() {
   const classes = useStyles();
   const [value, setValue] = useState(0);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+
   const handleChange = (e, value) => {
     setValue(value);
   };
 
-  useEffect(()=>{
-    if (window.location.pathname==="/"&& value!==0) {
+  const handleClick = (e) => {
+    setAnchorEl(e.currentTarget);
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+    setOpen(false);
+  };
+  useEffect(() => {
+    if (window.location.pathname === "/" && value !== 0) {
       setValue(0);
-    }else if(window.location.pathname==="/services" && value!==1){
+    } else if (window.location.pathname === "/services" && value !== 1) {
       setValue(1);
-    }else if(window.location.pathname==="/revolution" && value!==2){
+    } else if (window.location.pathname === "/revolution" && value !== 2) {
       setValue(2);
-    }else if(window.location.pathname==="/about" && value!==3){
+    } else if (window.location.pathname === "/about" && value !== 3) {
       setValue(3);
-    }else if(window.location.pathname==="/contact" && value!==4){
+    } else if (window.location.pathname === "/contact" && value !== 4) {
       setValue(4);
     }
   });
@@ -99,8 +113,11 @@ function Header() {
                 label="Home"
               />
               <Tab
+                aria-owns={anchorEl ? "simple-menu" : undefined}
+                aria-haspopup={anchorEl ? "true" : undefined}
                 className={classes.tab}
                 component={Link}
+                onMouseOver={(event) => handleClick(event)}
                 to="/services"
                 label="Services"
               />
@@ -130,6 +147,18 @@ function Header() {
             >
               Free Estimate
             </Button>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>
+                Custom Software Development
+              </MenuItem>
+              <MenuItem onClick={handleClose}>Mobile App Development</MenuItem>
+              <MenuItem onClick={handleClose}>Website Development</MenuItem>
+            </Menu>
           </Toolbar>
         </AppBar>
       </ElevationScroll>
