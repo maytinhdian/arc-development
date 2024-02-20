@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Button,
@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     height: "7em",
   },
+  logoContainer:{
+    padding:0
+  },
   tabContainer: {
     ...theme.typography.tabContainer,
   },
@@ -53,24 +56,72 @@ const useStyles = makeStyles((theme) => ({
 
 function Header() {
   const classes = useStyles();
-  const [value,setValue] = useState(0);
-  const handleChange = (e,value)=>{setValue(value)}
+  const [value, setValue] = useState(0);
+  const handleChange = (e, value) => {
+    setValue(value);
+  };
+
+  useEffect(()=>{
+    if (window.location.pathname==="/"&& value!==0) {
+      setValue(0);
+    }else if(window.location.pathname==="/services" && value!==1){
+      setValue(1);
+    }else if(window.location.pathname==="/revolution" && value!==2){
+      setValue(2);
+    }else if(window.location.pathname==="/about" && value!==3){
+      setValue(3);
+    }else if(window.location.pathname==="/contact" && value!==4){
+      setValue(4);
+    }
+  });
   return (
     <>
       <ElevationScroll>
         <AppBar position="fixed">
           <Toolbar disableGutters>
-            <img
-              className={classes.logo}
-              src={logo}
-              alt="TMT Innovative Logo"
-            />
-            <Tabs value={value} onChange={handleChange} indicatorColor="primary" className={classes.tabContainer}>
-              <Tab className={classes.tab} component={Link} to="/" label="Home" />
-              <Tab className={classes.tab} component={Link} to="/services" label="Services" />
-              <Tab className={classes.tab} component={Link} to="/revolution" label="The Revolution" />
-              <Tab className={classes.tab} component={Link} to="/about" label="About" />
-              <Tab className={classes.tab} component={Link} to="/contact" label="Contact Us" />
+            <Button component={Link} to="/" className={classes.logoContainer}>
+              <img
+                className={classes.logo}
+                src={logo}
+                alt="TMT Innovative Logo"
+              />
+            </Button>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="primary"
+              className={classes.tabContainer}
+            >
+              <Tab
+                className={classes.tab}
+                component={Link}
+                to="/"
+                label="Home"
+              />
+              <Tab
+                className={classes.tab}
+                component={Link}
+                to="/services"
+                label="Services"
+              />
+              <Tab
+                className={classes.tab}
+                component={Link}
+                to="/revolution"
+                label="The Revolution"
+              />
+              <Tab
+                className={classes.tab}
+                component={Link}
+                to="/about"
+                label="About"
+              />
+              <Tab
+                className={classes.tab}
+                component={Link}
+                to="/contact"
+                label="Contact Us"
+              />
             </Tabs>
             <Button
               variant="contained"
