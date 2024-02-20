@@ -2,14 +2,14 @@
 import Header from "../components/ui/Header";
 import Footer from "../components/ui/Footer";
 
-function Services() {
+function CustomApp() {
   return (
     <>
       <Header />
-      <div>Services</div>
+      <div>CustomApp</div>
       <Footer />
     </>
   );
 }
 
-export default Services;
+export default CustomApp;

@@ -1,11 +1,15 @@
 import { createTheme } from "@material-ui/core";
 
-const arcBlue = "#461dda";
+const arcBlue = "#25774e";
 const arcOrange = "#FFBA60";
 
 const theme = createTheme({
   palette: {
     mode: "dark",
+    common:{
+      blue: `${arcBlue}`
+    },
+
     primary: {
       main: `${arcBlue}`,
       // light: will be calculated from palette.primary.main,

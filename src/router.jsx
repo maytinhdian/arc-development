@@ -4,6 +4,9 @@ import Dashboard from "./pages/Dashboard";
 import Services from "./pages/Services";
 import Revolution from "./pages/Revolution";
 import Contact from "./pages/Contact";
+import MobileApp from "./pages/MobileApp";
+import WebApp from "./pages/WebApp";
+import CustomApp from "./pages/CustomApp";
 
 const BrowserRoutes = createBrowserRouter([
   {
@@ -25,6 +28,18 @@ const BrowserRoutes = createBrowserRouter([
   {
     path: "/contact",
     element: <Contact />,
+  },
+  {
+    path: "/mobile-app",
+    element: <MobileApp />,
+  },
+  {
+    path: "/custom-app",
+    element: <CustomApp />,
+  },
+  {
+    path: "/web-app",
+    element: <WebApp />,
   },
 ]);
 

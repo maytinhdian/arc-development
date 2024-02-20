@@ -13,7 +13,6 @@ import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
 
-
 function ElevationScroll(props) {
   const { children } = props;
 
@@ -55,6 +54,17 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "25px",
     height: "45px",
   },
+  menu: {
+    backgroundColor: theme.palette.common.blue,
+    color: "white",
+  },
+  menuItem: {
+    ...theme.typography.tab,
+    opacity: 0.7,
+    "&:hover": {
+      opacity: 1,
+    },
+  },
 }));
 
 function Header() {
@@ -62,6 +72,7 @@ function Header() {
   const [value, setValue] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
+  const [selectedIndex,setSelectedIndex]=useState(0);
 
   const handleChange = (e, value) => {
     setValue(value);
@@ -87,13 +98,18 @@ function Header() {
     } else if (window.location.pathname === "/contact" && value !== 4) {
       setValue(4);
     }
-  });
+  }, [value]);
   return (
     <>
       <ElevationScroll>
         <AppBar position="fixed">
           <Toolbar disableGutters>
-            <Button component={Link} to="/" className={classes.logoContainer}>
+            <Button
+              component={Link}
+              to="/"
+              disableRipple
+              className={classes.logoContainer}
+            >
               <img
                 className={classes.logo}
                 src={logo}
@@ -152,12 +168,54 @@ function Header() {
               anchorEl={anchorEl}
               open={open}
               onClose={handleClose}
+              classes={{ paper: classes.menu }}
+              MenuListProps={{ onMouseLeave: handleClose }}
+              elevation={0}
             >
-              <MenuItem onClick={handleClose}>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  setValue(1);
+                }}
+                component={Link}
+                to="/services"
+                classes={{ root: classes.menuItem }}
+              >
+                Services
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  setValue(1);
+                }}
+                component={Link}
+                to="/custom-app"
+                classes={{ root: classes.menuItem }}
+              >
                 Custom Software Development
               </MenuItem>
-              <MenuItem onClick={handleClose}>Mobile App Development</MenuItem>
-              <MenuItem onClick={handleClose}>Website Development</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  setValue(1);
+                }}
+                component={Link}
+                to="/mobile-app"
+                classes={{ root: classes.menuItem }}
+              >
+                Mobile App Development
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  setValue(1);
+                }}
+                component={Link}
+                to="/web-app"
+                classes={{ root: classes.menuItem }}
+              >
+                Website Development
+              </MenuItem>
             </Menu>
           </Toolbar>
         </AppBar>

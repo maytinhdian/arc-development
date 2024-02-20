@@ -2,14 +2,14 @@
 import Header from "../components/ui/Header";
 import Footer from "../components/ui/Footer";
 
-function Services() {
+function MobileApp() {
   return (
     <>
       <Header />
-      <div>Services</div>
+      <div>MobileApp</div>
       <Footer />
     </>
   );
 }
 
-export default Services;
+export default MobileApp;
