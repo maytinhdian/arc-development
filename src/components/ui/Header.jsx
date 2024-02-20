@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import logo from "../../assets/logo.svg";
+import { Link } from "react-router-dom";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -65,11 +66,11 @@ function Header() {
               alt="TMT Innovative Logo"
             />
             <Tabs value={value} onChange={handleChange} indicatorColor="primary" className={classes.tabContainer}>
-              <Tab className={classes.tab} label="Home" />
-              <Tab className={classes.tab} label="Services" />
-              <Tab className={classes.tab} label="The Revolution" />
-              <Tab className={classes.tab} label="About Us" />
-              <Tab className={classes.tab} label="Contact Us" />
+              <Tab className={classes.tab} component={Link} to="/" label="Home" />
+              <Tab className={classes.tab} component={Link} to="/services" label="Services" />
+              <Tab className={classes.tab} component={Link} to="/revolution" label="The Revolution" />
+              <Tab className={classes.tab} component={Link} to="/about" label="About" />
+              <Tab className={classes.tab} component={Link} to="/contact" label="Contact Us" />
             </Tabs>
             <Button
               variant="contained"
