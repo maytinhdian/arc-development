@@ -1,6 +1,4 @@
-import React from "react";
-
-function Footer(props) {
+function Footer() {
   return <div>Arc Development Co.,ltd</div>;
 }
 
