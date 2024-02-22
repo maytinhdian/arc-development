@@ -3,6 +3,9 @@ import {
   AppBar,
   Button,
   IconButton,
+  List,
+  ListItem,
+  ListItemText,
   Menu,
   MenuItem,
   SwipeableDrawer,
@@ -16,6 +19,7 @@ import {
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
+import { MenuSharp } from "@material-ui/icons";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -47,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
       height: "7em",
     },
     [theme.breakpoints.down("sx")]: {
-      height: "5.5em",
+      height: "5em",
     },
   },
   logoContainer: {
@@ -81,6 +85,23 @@ const useStyles = makeStyles((theme) => ({
       opacity: 1,
     },
   },
+  drawerIcon: {
+    height: "50px",
+    width: "50px",
+  },
+  drawerIconContainer: {
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
+    marginLeft: "auto",
+  },
+  drawer:{
+    backgroundColor: theme.palette.common.blue
+  },
+  drawerItem:{
+    ...theme.typography.tab,
+    color:"white"
+  }
 }));
 
 function Header() {
@@ -252,11 +273,35 @@ function Header() {
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
         onOpen={() => setOpenDrawer(true)}
+        classes={{paper: classes.drawer}}
       >
-        Example Drawer
+        <List disablePadding>
+          <ListItem onClick={()=>setOpenDrawer(false)} divider button component={Link} to="/">
+            <ListItemText className={classes.drawerItem} disableTypography>Home</ListItemText>
+          </ListItem>
+          <ListItem onClick={()=>setOpenDrawer(false)} divider button component={Link} to="/services">
+            <ListItemText className={classes.drawerItem} disableTypography>Serivces</ListItemText>
+          </ListItem>
+          <ListItem onClick={()=>setOpenDrawer(false)} divider button component={Link} to="/revolution">
+            <ListItemText className={classes.drawerItem} disableTypography>Revolution</ListItemText>
+          </ListItem>
+          <ListItem onClick={()=>setOpenDrawer(false)} divider button component={Link} to="/contact">
+            <ListItemText className={classes.drawerItem} disableTypography>Contact</ListItemText>
+          </ListItem>
+          <ListItem onClick={()=>setOpenDrawer(false)} divider button component={Link} to="/about">
+            <ListItem className={classes.drawerItem} disableTypography>About Us</ListItem>
+          </ListItem>
+          {/* <ListItem divider button component={Link} to="/about">
+            <ListItemText disableTypography>Free Estimate</ListItemText>
+          </ListItem> */}
+        </List>
       </SwipeableDrawer>
-      <IconButton onClick={()=>setOpenDrawer(!openDrawer)} disableRipple>
-
+      <IconButton
+        className={classes.drawerIconContainer}
+        onClick={() => setOpenDrawer(!openDrawer)}
+        disableRipple
+      >
+        <MenuSharp className={classes.drawerIcon} />
       </IconButton>
     </React.Fragment>
   );
