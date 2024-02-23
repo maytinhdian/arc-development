@@ -8,7 +8,6 @@ function App() {
     <Fragment>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-
         <Router />
       </ThemeProvider>
     </Fragment>

@@ -142,66 +142,37 @@ function Header() {
     setOpenMenu(false);
   };
 
-  const menuOptions = [
-    { name: "Services", link: "/services" },
-    { name: "Custom Software Development", link: "/custom-app" },
-    { name: "Mobile App Development", link: "/mobile-app" },
-    { name: "Website Development", link: "/web-app" },
+  const menuOptions =  [
+    { name: "Services", link: "/services",activeIndex:1,selectedIndex:0 },
+    { name: "Custom Software Development", link: "/custom-app",activeIndex:1,selectedIndex:1  },
+    { name: "Mobile App Development", link: "/mobile-app",activeIndex:1,selectedIndex:2  },
+    { name: "Website Development", link: "/web-app",activeIndex:1,selectedIndex:3  },
+  ];
+
+  const routes = [
+    { name: "Home", link: "/", activeIndex: 0 },
+    { name: "Services", link: "/services", activeIndex: 1 },
+    { name: "The Revolution", link: "/revolution", activeIndex: 2 },
+    { name: "About", link: "/about", activeIndex: 3 },
+    { name: "Contact Us", link: "/contact", activeIndex: 4 },
   ];
 
   useEffect(() => {
-    switch (window.location.pathname) {
-      case "/":
-        if (value !== 0) {
-          setValue(0);
-        }
-        break;
-      case "/services":
-        if (value !== 1) {
-          setValue(1);
-          setSelectedIndex(0);
-        }
-        break;
-      case "/custom-app":
-        if (value !== 1) {
-          setValue(1);
-          setSelectedIndex(1);
-        }
-        break;
-      case "/mobile-app":
-        if (value !== 1) {
-          setValue(1);
-          setSelectedIndex(2);
-        }
-        break;
-      case "/web-app":
-        if (value !== 1) {
-          setValue(1);
-          setSelectedIndex(3);
-        }
-        break;
-      case "/revolution":
-        if (value !== 2) {
-          setValue(2);
-          setSelectedIndex(4);
-        }
-        break;
-      case "/about":
-        if (value !== 3) {
-          setValue(3);
-          setSelectedIndex(5);
-        }
-        break;
-      case "/contact":
-        if (value !== 4) {
-          setValue(4);
-          setSelectedIndex(6);
-        }
-        break;
-      default:
-        break;
-    }
-  }, [value]);
+    [...menuOptions, ...routes].forEach((route) => {
+      switch (window.location.pathname) {
+        case `${route.link}`:
+          if (value !== route.activeIndex) {
+            setValue(route.activeIndex);
+            if (route.selectedIndex && route.selectedIndex !== selectedIndex) {
+              setSelectedIndex(route.selectedIndex);
+            }
+          }
+          break;
+        default:
+          break;
+      }
+    });
+  }, [value,menuOptions,selectedIndex,routes]);
 
   const tabs = (
     <React.Fragment>
@@ -314,11 +285,14 @@ function Header() {
             to="/services"
             selected={value === 1}
           >
-            <ListItemText className={
+            <ListItemText
+              className={
                 value === 1
                   ? [classes.drawerItem, classes.drawerItemSelected]
                   : classes.drawerItem
-              } disableTypography>
+              }
+              disableTypography
+            >
               Serivces
             </ListItemText>
           </ListItem>
@@ -332,11 +306,14 @@ function Header() {
             to="/revolution"
             selected={value === 2}
           >
-            <ListItemText className={
+            <ListItemText
+              className={
                 value === 2
                   ? [classes.drawerItem, classes.drawerItemSelected]
                   : classes.drawerItem
-              } disableTypography>
+              }
+              disableTypography
+            >
               Revolution
             </ListItemText>
           </ListItem>
@@ -350,11 +327,14 @@ function Header() {
             to="/contact"
             selected={value === 3}
           >
-            <ListItemText className={
+            <ListItemText
+              className={
                 value === 3
                   ? [classes.drawerItem, classes.drawerItemSelected]
                   : classes.drawerItem
-              } disableTypography>
+              }
+              disableTypography
+            >
               Contact
             </ListItemText>
           </ListItem>
@@ -368,11 +348,14 @@ function Header() {
             to="/about"
             selected={value === 4}
           >
-            <ListItemText className={
+            <ListItemText
+              className={
                 value === 4
                   ? [classes.drawerItem, classes.drawerItemSelected]
                   : classes.drawerItem
-              } disableTypography>
+              }
+              disableTypography
+            >
               About Us
             </ListItemText>
           </ListItem>
@@ -384,11 +367,14 @@ function Header() {
             to="/about"
             selected={value === 5}
           >
-            <ListItemText className={
+            <ListItemText
+              className={
                 value === 5
                   ? [classes.drawerItem, classes.drawerItemSelected]
                   : classes.drawerItem
-              } disableTypography>
+              }
+              disableTypography
+            >
               Free Estimate
             </ListItemText>
           </ListItem>
