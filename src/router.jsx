@@ -7,6 +7,7 @@ import Contact from "./pages/Contact";
 import MobileApp from "./pages/MobileApp";
 import WebApp from "./pages/WebApp";
 import CustomApp from "./pages/CustomApp";
+import Estimate from "./pages/Estimate";
 
 const BrowserRoutes = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const BrowserRoutes = createBrowserRouter([
   {
     path: "/contact",
     element: <Contact />,
+  },
+  {
+    path: "/estimate",
+    element: <Estimate />,
   },
   {
     path: "/mobile-app",
