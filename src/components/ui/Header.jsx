@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import PropTypes from 'prop-types';
 import {
   AppBar,
   Button,
@@ -116,19 +117,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Header() {
+function Header(props) {
+
+  
+  // Header.propTypes = {
+  //   props: PropTypes.string.isRequired
+  // }
   const classes = useStyles();
   const theme = useTheme();
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
   const matches = useMediaQuery(theme.breakpoints.down("md"));
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [value, setValue] = useState(0);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleChange = (e, newValue) => {
-    setValue(newValue);
+    props.setValue(newValue);
   };
 
   const handleClick = (e) => {
@@ -139,7 +144,7 @@ function Header() {
   const handleMenuItemClick = (e, i) => {
     setAnchorEl(null);
     setOpenMenu(false);
-    setSelectedIndex(i);
+    props.setSelectedIndex(i);
   };
 
   const handleClose = () => {
@@ -191,10 +196,13 @@ function Header() {
     [...memoizedMenuOptions, ...memoizedRoutes].forEach((route) => {
       switch (window.location.pathname) {
         case `${route.link}`:
-          if (value !== route.activeIndex) {
-            setValue(route.activeIndex);
-            if (route.selectedIndex && route.selectedIndex !== selectedIndex) {
-              setSelectedIndex(route.selectedIndex);
+          if (props.value !== route.activeIndex) {
+            props.setValue(route.activeIndex);
+            if (
+              route.selectedIndex &&
+              route.selectedIndex !== props.selectedIndex
+            ) {
+              props.setSelectedIndex(route.selectedIndex);
             }
           }
           break;
@@ -202,12 +210,18 @@ function Header() {
           break;
       }
     });
-  }, [value, memoizedMenuOptions, selectedIndex, memoizedRoutes]);
+  }, [
+    props.value,
+    memoizedMenuOptions,
+    props.selectedIndex,
+    memoizedRoutes,
+    props,
+  ]);
 
   const tabs = (
     <React.Fragment>
       <Tabs
-        value={value}
+        value={props.value}
         onChange={handleChange}
         className={classes.tabContainer}
         indicatorColor="primary"
@@ -247,10 +261,10 @@ function Header() {
             classes={{ root: classes.menuItem }}
             onClick={(event) => {
               handleMenuItemClick(event, i);
-              setValue(1);
+              props.setValue(1);
               handleClose();
             }}
-            selected={i === selectedIndex && value === 1}
+            selected={i === props.selectedIndex && props.value === 1}
           >
             {option.name}
           </MenuItem>
@@ -278,7 +292,7 @@ function Header() {
               button
               component={Link}
               to={route.link}
-              selected={value === route.activeIndex}
+              selected={props.value === route.activeIndex}
               classes={{ selected: classes.drawerItemSelected }}
             >
               <ListItemText className={classes.drawerItem} disableTypography>
@@ -301,8 +315,9 @@ function Header() {
 
   return (
     <>
+      {/* <div className={classes.toolbarMagrin} /> */}
       <ElevationScroll>
-        <AppBar position="fixed">
+        <AppBar position="fixed" className={classes.appbar}>
           <Toolbar disableGutters>
             <Button
               component={Link}
@@ -320,7 +335,7 @@ function Header() {
           </Toolbar>
         </AppBar>
       </ElevationScroll>
-      <div className={classes.toolbarMagrin}></div>
+      <div className={classes.toolbarMagrin} />
     </>
   );
 }

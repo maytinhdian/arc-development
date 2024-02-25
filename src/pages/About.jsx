@@ -1,13 +1,7 @@
-import React from "react";
-import Header from "../components/ui/Header";
-import Footer from "../components/ui/Footer";
-
-function About(props) {
+function About() {
   return (
     <>
-      <Header />
       <div>About</div>
-      <Footer />
     </>
   );
 }

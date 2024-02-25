@@ -8,43 +8,50 @@ import MobileApp from "./pages/MobileApp";
 import WebApp from "./pages/WebApp";
 import CustomApp from "./pages/CustomApp";
 import Estimate from "./pages/Estimate";
+import DefaultLayout from "./components/layout/DefaultLayout";
 
 const BrowserRoutes = createBrowserRouter([
   {
     path: "/",
-    element: <Dashboard />,
-  },
-  {
-    path: "/about",
-    element: <About />,
-  },
-  {
-    path: "/services",
-    element: <Services />,
-  },
-  {
-    path: "/revolution",
-    element: <Revolution />,
-  },
-  {
-    path: "/contact",
-    element: <Contact />,
-  },
-  {
-    path: "/estimate",
-    element: <Estimate />,
-  },
-  {
-    path: "/mobile-app",
-    element: <MobileApp />,
-  },
-  {
-    path: "/custom-app",
-    element: <CustomApp />,
-  },
-  {
-    path: "/web-app",
-    element: <WebApp />,
+    element: <DefaultLayout />,
+    children: [
+      {
+        path: "",
+        element: <Dashboard />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "services",
+        element: <Services />,
+      },
+      {
+        path: "revolution",
+        element: <Revolution />,
+      },
+      {
+        path: "contact",
+        element: <Contact />,
+      },
+      {
+        path: "estimate",
+        element: <Estimate />,
+      },
+      {
+        path: "mobile-app",
+        element: <MobileApp />,
+      },
+      {
+        path: "custom-app",
+        element: <CustomApp />,
+      },
+      {
+        path: "web-app",
+        element: <WebApp />,
+      },
+    ],
   },
 ]);
 
